@@ -1,9 +1,7 @@
-'use client'
-
 import { downloadQRCode } from '@/helpers/downloadQRCode'
 import { generatePDF } from '@/helpers/generatePDF'
 import { formComponentTypes } from '@/interfaces/app_interfaces';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import QRcode from 'qrcode.react'
 
 export const QRfromProfile = ({isDataCorrect, profileId}: formComponentTypes) => {
