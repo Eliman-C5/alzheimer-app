@@ -5,6 +5,7 @@ import { client } from '@/sanity/schemas'
 import React, { useEffect, useState } from 'react'
 import QRcode from 'qrcode.react'
 import jsPDF from 'jspdf';
+import { BackToHome } from '@/components/BackToHome';
 
 export default function Page() {
 
@@ -47,7 +48,7 @@ export default function Page() {
   }, [session])
   
   if (!session?.user?.email || !info) {
-    return <div>Tienes que ingresar con tu cuenta gmail. Si ya ingresaste espera unos segundos...</div>
+    return <BackToHome />
   }
   
   const deleteUser = (id: any) => {

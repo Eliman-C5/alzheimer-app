@@ -9,6 +9,12 @@ export type NavbarProps = {
   name: string
 }[]
 
+export type formComponentTypes = {
+  onSubmit?: any,
+  profileId: number,
+  isDataCorrect: boolean,
+}
+
 export type propChildren = {
   children: ReactNode
 }
