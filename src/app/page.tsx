@@ -1,7 +1,6 @@
-// import Image fro}m 'next/image'
-
 'use client'
 
+import { StarOnGithub } from "@/components/StarOnGithub"
 import Image from "next/image"
 
 export default function Home() {
@@ -11,7 +10,9 @@ export default function Home() {
       
       <div className="w-11/12 md:w-8/12 mx-auto mt-12">
       
-      <p className="text-justify">Esta aplicación web surge con el propósito de brindar una herramienta útil y eficiente para facilitar el cuidado de los adultos mayores en nuestra comunidad. Con nuestro sistema de registro e identificación mediante código QR, podrás fácilmente registrarte con tu nombre y número de teléfono, seguido de los datos del adulto mayor, de esta manera, si en algún momento este se llegase a extraviar, la persona que lo encuentre y desee ayudar pueda escanear el código QR ubicado en la prenda de vestir del portador, re direccionándolo a una página web con todos los datos esenciales del adulto mayor y para contactar con usted.</p>
+      <StarOnGithub />
+      
+      <p className="text-justify mt-12">Esta aplicación web surge con el propósito de brindar una herramienta útil y eficiente para facilitar el cuidado de los adultos mayores en nuestra comunidad. Con nuestro sistema de registro e identificación mediante código QR, podrás fácilmente registrarte con tu nombre y número de teléfono, seguido de los datos del adulto mayor, de esta manera, si en algún momento este se llegase a extraviar, la persona que lo encuentre y desee ayudar pueda escanear el código QR ubicado en la prenda de vestir del portador, re direccionándolo a una página web con todos los datos esenciales del adulto mayor y para contactar con usted.</p>
       
       <Image 
         priority
