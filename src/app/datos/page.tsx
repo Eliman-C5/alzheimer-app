@@ -76,7 +76,8 @@ export default function Page() {
       <div className='w-11/12'>
       {
         info && info.length > 0 ?
-        info.map((user: any, id: any) => user.email === session?.user?.email && (
+        info.map((user: any, id: any) => user.email === session?.user?.email && 
+        (
             <div className="border flex flex-col gap-0 lg:flex-row lg:gap-8 my-4" key={user.id}>
               <div className="flex flex-col mx-auto lg:m-0 gap-4 w-4/5 p-4">
                 <h5>{user.adultname}</h5>

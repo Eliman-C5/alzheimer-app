@@ -29,7 +29,7 @@ export default function Page ({}) {
       
     })
   
-  }, [profileID])
+  }, [profileID, pathname])
   
   return (
     <>
