@@ -18,7 +18,7 @@ export const QRfromProfile = ({isDataCorrect, profileId}: formComponentTypes) =>
         </button>
         <p className='text-center'>o</p>
         <div className="bg-[#e4e4e4] p-4 my-4">
-          <QRcode id="qrcode-canvas" level="H" size={300} value={`https://web-app-alzheimer.vercel.app/profile/${profileId}`} />
+          <QRcode id="qrcode-canvas" level="H" size={300} value={`https://alzheimer-app.vercel.app/profile/${profileId}`} />
         </div>
         <div className="flex flex-col gap-4">
           <a 

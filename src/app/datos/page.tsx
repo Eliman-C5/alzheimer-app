@@ -82,7 +82,7 @@ export default function Page() {
               <div className="flex flex-col mx-auto lg:m-0 gap-4 w-4/5 p-4">
                 <h5>{user.adultname}</h5>
                 <p>{user.adultage} años</p>
-                <QRcode className={`qrcode-canvas-datos-${user.id}`} level="H" size={150} value={`https://web-app-alzheimer.vercel.app/profile/${user.id}`} />
+                <QRcode className={`qrcode-canvas-datos-${user.id}`} level="H" size={150} value={`https://alzheimer-app.vercel.app/profile/${user.id}`} />
                 <a 
                   onClick={() => generatePDF(user.id)} 
                   className='text-center cursor-pointer w-full sm:w-8/12 lg:w-6/12 rounded-[20px] border border-blue-400 bg-white hover:bg-blue-400 hover:text-white text-blue-400 hover:opacity-90 p-[6px] font-bold'
