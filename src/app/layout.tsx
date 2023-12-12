@@ -14,6 +14,9 @@ export default async function RootLayout({
   return (
     <SessionProvider>
       <html lang="en">
+        <head>
+          <title>Alzheimer Web App</title>
+        </head>
         <body>
           <Navbar/>
           <FormProvider>
