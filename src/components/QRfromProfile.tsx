@@ -18,11 +18,16 @@ export const QRfromProfile = ({isDataCorrect, profileId}: formComponentTypes) =>
         </button>
         <p className='text-center'>o</p>
         <div className="bg-[#e4e4e4] p-4 my-4">
-          <QRcode id="qrcode-canvas" level="H" size={300} value={`https://alzheimer-app.vercel.app/profile/${profileId}`} />
+          <QRcode 
+            id="qrcode-canvas" 
+            level="H" 
+            size={300} 
+            value={`https://alzheimer-app.vercel.app/profile/${profileId}`} 
+          />
         </div>
         <div className="flex flex-col gap-4">
           <a 
-            onClick={generatePDF} 
+            onClick={() => generatePDF} 
             className='text-center cursor-pointer rounded-[15px] border border-blue-400 bg-white text-blue-400 hover:opacity-90 p-[6px] font-bold'
           >
             Descargar el QR en PDF

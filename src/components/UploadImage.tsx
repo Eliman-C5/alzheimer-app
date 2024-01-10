@@ -1,3 +1,5 @@
+// @ts-nocheck 
+
 import { FormContext } from '@/context/FormProvider'
 import React, { useContext, useState } from 'react'
 
@@ -15,7 +17,7 @@ export const UploadImage = () => {
     data.append('file', e.target.files[0])
     data.append('upload_preset', 't4zcamhq')
     
-    fetch('https://api.cloudinary.com/v1_1/datsipxkz/image/upload', {
+    fetch(process.env.CLOUDINARY_API__KEY, {
       method: 'POST',
       body: data
     })

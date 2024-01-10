@@ -6,24 +6,25 @@ import { FormProvider } from '@/context/FormProvider'
 import { SessionProvider } from "next-auth/react"
 import { metadata } from '@/helpers/metadata'
 import { PropChildren } from '@/interfaces/app_interfaces'
+import {NextUIProvider} from "@nextui-org/react";
 
-export default async function RootLayout({
-  children 
-}: PropChildren) {
+export default function RootLayout({children}: PropChildren) {
 
   return (
-    <SessionProvider>
       <html lang="en">
         <head>
           <title>Alzheimer Web App</title>
         </head>
         <body>
-          <Navbar/>
-          <FormProvider>
-          {children}
-          </FormProvider>
+          <SessionProvider>
+            <NextUIProvider>
+              <Navbar/>
+              <FormProvider>
+                {children}
+              </FormProvider>
+            </NextUIProvider>
+          </SessionProvider>
         </body>
       </html>
-    </SessionProvider>
   )
 }
