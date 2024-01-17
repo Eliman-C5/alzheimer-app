@@ -3,12 +3,14 @@
 import React from "react";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@nextui-org/react";
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 
 export function NavbarDropdown() {
 
   const { data: session } = useSession();
+  
+  const router = useRouter();
   
   // const redirectFunction = () => {
     
@@ -34,15 +36,17 @@ export function NavbarDropdown() {
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem key="registrar">
-            <Link href='/registrar'>
+          <DropdownItem 
+            key="registrar"
+            onClick={() => router.push('/registrar')}
+          >
             Registrar
-            </Link>
           </DropdownItem>
-          <DropdownItem key="datos">
-            <Link href='/datos'>
+          <DropdownItem 
+            key="datos"
+            onClick={() => router.push('/datos')}
+          >
             Lista
-            </Link>
           </DropdownItem>
           <DropdownItem key="delete" className="text-danger" color="danger">
             Salir

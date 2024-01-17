@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 
-export const generatePDF = (byUserID:number = 0) => {
+export const generatePDF = (id: number) => {
 
   // Defines the pdf
   let pdf = new jsPDF({
@@ -14,12 +14,9 @@ export const generatePDF = (byUserID:number = 0) => {
   
   let image64
   
-  if (byUserID > 0) {
-    image64  = document.querySelector(`.qrcode-canvas-datos-${byUserID}`) as HTMLCanvasElement
-  } else {
-    image64 = document.querySelector("#qrcode-canvas") as HTMLCanvasElement
-  }  
-
+  id ? image64 = document.querySelector(`.qrcode-canvas-datos-${id}`) as HTMLCanvasElement:
+  image64 = document.querySelector('#qrcode-canvas') as HTMLCanvasElement
+      
   image64.toDataURL()
 
   // Adds the image to the pdf
