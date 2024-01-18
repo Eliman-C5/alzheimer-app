@@ -3,10 +3,8 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Logo from '../../public/images/alzhaimer-logo.png'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import Logo from '../../../public/images/alzhaimer-logo.png'
 import {NavbarDropdown} from './NavbarDropdown'
-import { redirect } from 'next/navigation'
 
 export const Navbar = () => {
     

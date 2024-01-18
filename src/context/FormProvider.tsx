@@ -21,13 +21,16 @@ export const FormProvider = ({children}: propChildren) => {
     email: '',
     id: Math.round(Math.random() * 10000000)
   })
+  const [info, setInfo] = useState<any>([])
 
   return (
     <FormContext.Provider value={{
       datosFormulario,
       setDatosFormulario,
       images,
-      setImages
+      setImages,
+      info,
+      setInfo
     }}>
     {children}
     </FormContext.Provider>

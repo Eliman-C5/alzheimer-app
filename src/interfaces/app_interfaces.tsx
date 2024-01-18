@@ -47,5 +47,7 @@ export type formTypes = {
   datosFormulario: userProps,
   setDatosFormulario: React.Dispatch<React.SetStateAction<userProps>>,
   images: string | ChangeEvent<HTMLInputElement> | null | FileList | any,
-  setImages: React.Dispatch<any>
+  setImages: React.Dispatch<any>,
+  info: any,
+  setInfo: any
 }

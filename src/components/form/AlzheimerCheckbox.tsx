@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Checkbox} from "@nextui-org/react";
 
 type AlzheimerCheckbox = {
   datosFormulario: any,
@@ -10,37 +11,36 @@ export const AlzheimerCheckbox = ({datosFormulario, setDatosFormulario}: Alzheim
     type: '',
     active: false
   })
-
+  
   return (
     <fieldset className='mt-4'>
-          <legend>Seleccionar condición de el adulto mayor</legend>
+          <legend className='text-[15px] mb-4'>Seleccionar condición de el adulto mayor</legend>
           
           <div className="flex gap-4 items-center">
-            <input 
-              type="checkbox" 
+          
+            <Checkbox
               id="alzheimer" 
               name="alzheimer"
-              disabled={illnes.type === 'Demencia senil' && illnes.active ? true : false}
+              isDisabled={illnes.type === 'Demencia senil' && illnes.active ? true : false}
               onClick={() => {
                 setIllnes({type: 'Alzheimer', active: !illnes.active})
                 setDatosFormulario({...datosFormulario, illnes: 'Alzheimer'})
               }}
-            />
-            <label>Alzheimer</label>
-          </div>
-          
-          <div className="flex gap-4 items-center">
-            <input 
-              type="checkbox" 
+            >
+              Alzheimer
+            </Checkbox>
+            <Checkbox
               id="demencia senil" 
-              name="demencia senil" 
-              disabled={illnes.type === 'Alzheimer' && illnes.active ? true : false}
+              name="demencia senil"
+              isDisabled={illnes.type === 'Alzheimer' && illnes.active ? true : false}
               onClick={() => {
                 setIllnes({type: 'Demencia senil', active: !illnes.active})
                 setDatosFormulario({...datosFormulario, illnes: 'Demencia senil'})
               }}
-            />
-            <label>Demencia senil</label>
+            >
+              Demencia senil
+            </Checkbox>
+            
           </div>
           
     </fieldset>

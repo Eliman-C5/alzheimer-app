@@ -17,7 +17,7 @@ export const UploadImage = () => {
     data.append('file', e.target.files[0])
     data.append('upload_preset', 't4zcamhq')
     
-    fetch(process.env.CLOUDINARY_API__KEY, {
+    fetch('https://api.cloudinary.com/v1_1/datsipxkz/image/upload', {
       method: 'POST',
       body: data
     })
@@ -32,7 +32,7 @@ export const UploadImage = () => {
   
   return (
     <div className='my-8 flex flex-col gap-4'>
-      <label>Carga una imagen de aproximadamente 500px de ancho y alto</label>
+      <label className='text-[15px]'>Carga una imagen de aproximadamente 500px de ancho y alto</label>
       <input 
         type='file' 
         accept="image/png, image/jpeg" 

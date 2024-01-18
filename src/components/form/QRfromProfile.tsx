@@ -27,7 +27,7 @@ export const QRfromProfile = ({isDataCorrect, profileId}: formComponentTypes) =>
         </div>
         <div className="flex flex-col gap-4">
           <a 
-            onClick={() => generatePDF} 
+            onClick={() => generatePDF(0)} 
             className='text-center cursor-pointer rounded-[15px] border border-blue-400 bg-white text-blue-400 hover:opacity-90 p-[6px] font-bold'
           >
             Descargar el QR en PDF

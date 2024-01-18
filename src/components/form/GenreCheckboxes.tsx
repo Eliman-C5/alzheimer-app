@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Checkbox} from "@nextui-org/react";
 
 type GenreProps = {
   datosFormulario: any,
@@ -14,34 +15,32 @@ export const GenreCheckboxes = ({datosFormulario, setDatosFormulario}: GenreProp
 
   return (
     <fieldset>
-          <legend>Seleccionar género de el adulto</legend>
+          <legend className='text-[15px] mb-4'>Seleccionar género de el adulto</legend>
           
           <div className="flex gap-4 items-center">
-            <input 
-              type="checkbox" 
+            <Checkbox
               id="masculino" 
               name="masculino"
-              disabled={genre.type === 'Femenino' && genre.active ? true : false}
+              isDisabled={genre.type === 'Femenino' && genre.active ? true : false}
               onClick={() => {
                 setGenre({type: 'Masculino', active: !genre.active})
                 setDatosFormulario({...datosFormulario, genre: 'Masculino'})
               }}
-            />
-            <label>Másculino</label>
-          </div>
-          
-          <div className="flex gap-4 items-center">
-            <input 
-              type="checkbox" 
+            >
+              Másculino
+            </Checkbox>
+            <Checkbox
               id="femenino" 
-              name="femenino" 
-              disabled={genre.type === 'Masculino' && genre.active ? true : false}
+              name="femenino"
+              isDisabled={genre.type === 'Masculino' && genre.active ? true : false}
               onClick={() => {
                 setGenre({type: 'Femenino', active: !genre.active})
                 setDatosFormulario({...datosFormulario, genre: 'Femenino'})
               }}
-            />
-            <label>Femenino</label>
+            >
+              Femenino
+            </Checkbox>
+
           </div>
           
     </fieldset>

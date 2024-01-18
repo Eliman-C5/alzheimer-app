@@ -2,16 +2,17 @@
 
 import { useSession } from 'next-auth/react';
 import { client } from '@/sanity/schemas'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { BackToHome } from '@/components/BackToHome';
-import { UserList } from '@/components/UserList';
-import { UserAdmin } from '@/components/UserAdmin';
+import { UserList } from '@/components/user/UserList';
+import { UserAdmin } from '@/components/user/UserAdmin';
+import { FormContext } from '@/context/FormProvider';
 
 export default function Page() {
 
   const { data: session } = useSession();
   
-  const [info, setInfo] = useState<any>([])
+  const {info, setInfo} = useContext(FormContext);
   
   useEffect(() => {
   
@@ -32,21 +33,6 @@ export default function Page() {
     return <BackToHome />
   }
   
-  const deleteUser = (id: any) => {
-    // Cambia la llamada para actualizar la lista de usuarios después de eliminar
-    client
-      .delete({ query: `*[_type == "users"][${id}]` })
-      .then(() => {
-        // Actualiza la lista después de eliminar
-        client.fetch('*[_type == "users"]').then(res => {
-          setInfo(res);
-        });
-      })
-      .catch(error => {
-        console.error('Error deleting user:', error);
-      });
-  };
-  
   return (
     <div className='w-11/12 md:w-8/12 mx-auto'>
     
@@ -58,7 +44,7 @@ export default function Page() {
             
       <h4 className='mb-4 font-bold'>Registros:</h4>
       
-      <div className='w-11/12 flex flex-col gap-5 my-4'>
+      <div className='w-11/12 flex flex-col md:flex-row flex-wrap gap-5 my-4'>
       { 
         info.map((user: any, id: any) => user.email === session?.user?.email && 
             <UserList 
@@ -69,7 +55,7 @@ export default function Page() {
               illnes={user.illnes}
               userphone={user.userphone}
               image={user.image}
-              deleteUser={deleteUser} 
+              docId={user._id}
             /> 
         )
       }

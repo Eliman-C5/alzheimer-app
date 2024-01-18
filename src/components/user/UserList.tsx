@@ -3,20 +3,40 @@ import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nex
 import QRcode from 'qrcode.react'
 import {Button} from "@nextui-org/react";
 import {UserIcon} from './UserIcon';
-import React from 'react'
+import React, { useContext } from 'react'
 import { AnchorIcon } from './AnchorIcon';
+import { client } from '@/sanity/schemas';
+import { FormContext } from '@/context/FormProvider';
 
 type UserListProps = {
   adultname: string,
   adultage: number,
   id: number,
-  deleteUser: Function,
   image: string,
   illnes: string, 
-  userphone: number
+  userphone: number,
+  docId: string
 }
 
-export const UserList = ({adultname, adultage, id, deleteUser, image, illnes, userphone}: UserListProps) => {
+export const UserList = ({adultname, adultage, id, docId, image, illnes, userphone}: UserListProps) => {
+
+  const {info, setInfo} = useContext(FormContext);
+
+  const deleteUser = (e: any) => {
+    // Cambia la llamada para actualizar la lista de usuarios después de eliminar
+    client
+      .delete(docId)
+      .then(() => {
+        // Actualiza la lista después de eliminar
+        client.fetch('*[_type == "users"]').then(res => {
+          console.log(res, id)
+          setInfo(res);
+        });
+      })
+      .catch(error => {
+        console.error('Error deleting user:', error);
+      });
+  };
 
   return (
       <Card className="max-w-[400px]">
@@ -44,6 +64,7 @@ export const UserList = ({adultname, adultage, id, deleteUser, image, illnes, us
                 showAnchorIcon
                 href={`https://alzheimer-app.vercel.app/profile/${id}`}
                 anchorIcon={<AnchorIcon />}
+                className='text-[16px] lg:text-[20px]'
               >
                 perfil
               </Link>
@@ -57,7 +78,13 @@ export const UserList = ({adultname, adultage, id, deleteUser, image, illnes, us
         </CardBody>
         <Divider/>
         <CardFooter>
-          <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={() => deleteUser(id)}>
+          <Button 
+            color="danger" 
+            variant="bordered" 
+            startContent={<UserIcon/>} 
+            onClick={(e) => deleteUser(e)} 
+            id={`${docId}`}
+          >
             Borrar Paciente
           </Button>
         </CardFooter>

@@ -48,7 +48,12 @@ export function NavbarDropdown() {
           >
             Lista
           </DropdownItem>
-          <DropdownItem key="delete" className="text-danger" color="danger">
+          <DropdownItem 
+            key="delete" 
+            className="text-danger" 
+            color="danger"
+            onClick={() => signOut()}
+          >
             Salir
           </DropdownItem>
         </DropdownMenu>

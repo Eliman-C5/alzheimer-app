@@ -1,69 +1,72 @@
 'use client'
 
-import { FormComponent } from '@/components/FormComponent'
-import { FormContext } from '@/context/FormProvider'
-import { client } from '@/sanity/schemas'
-import { useSession } from 'next-auth/react'
-import React, { useState, useContext } from 'react'
+import { AlzheimerCheckbox } from "@/components/form/AlzheimerCheckbox";
+import { BackToHome } from "@/components/BackToHome";
+import { GenreCheckboxes } from "@/components/form/GenreCheckboxes";
+import { QRfromProfile } from "@/components/form/QRfromProfile";
+import { UploadImage } from "@/components/form/UploadImage";
+import { FormContext } from "@/context/FormProvider";
+import { formData } from "@/helpers/formData";
+import { useData } from "@/hooks/useData"
+import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import {Input} from "@nextui-org/react";
 
 export default function Page() {
+
+  const {onSubmit, isDataCorrect, profileId} = useData();
   
-  const [profileId, setProfileId] = useState<number>(404);
-  const [isDataCorrect, setIsDataCorrect] = useState<boolean>(false);
-  
-  const {datosFormulario, setDatosFormulario, images} = useContext(FormContext)
+  const {datosFormulario, setDatosFormulario} = useContext(FormContext);
   
   const { data: session } = useSession();
-  
-  console.log(session)
-  
-  //Cambiar el any
-  const onSubmit = (e: any) => {
-    e.preventDefault();
     
-    console.log(datosFormulario.id, images, session)
-    
-    //Creando el doc
-    const doc = {
-      _type: 'users',
-      id: datosFormulario.id,
-      email: session?.user?.email,
-      username: datosFormulario.username,
-      adultname: datosFormulario.adultname,
-      adultage: datosFormulario.adultage,
-      adultAddress: datosFormulario.adultAddress,
-      image: images,
-      genre: datosFormulario.genre,
-      illnes: datosFormulario.illnes,
-      userphone: datosFormulario.userphone
-    }
-    
-    // Envía los datos a Sanity
-    client.create(doc)
-    .catch(error => console.log(error));
-    
-    //Trae los datos de Sanity
-    client.fetch('*[_type == "users"]').then(res => console.log(res))
-    
-    //Establecer el id de la pagina de perfil
-    setProfileId(datosFormulario.id)
-    
-    //Mostrar boton que redirige a la pagina de perfil
-    setIsDataCorrect(true);
-  
-    //Cambiar id por si quieren volver a registrar a alguien
-    setDatosFormulario({...datosFormulario, id: Math.round(Math.random() * 10000000)})
-    
-    console.log(datosFormulario.id, 'nuevo');
-    
-    window.alert('El adulto mayor ha sido registrado')
+  if (!session?.user?.email) {
+    return <BackToHome />
   }
 
   return (
-    <FormComponent 
-      onSubmit={onSubmit} 
-      profileId={profileId} 
-      isDataCorrect={isDataCorrect} 
-    />
+    <main className="flex min-h-screen flex-col items-center justify-between p-[24px]">
+    
+      <form className='shadow-lg gap-4' onSubmit={onSubmit}>
+      
+        <h2 className="text-[22px] sm:text-[24px] font-bold my-4">
+          Formulario para creación de perfil público de adulto mayor
+        </h2>
+        <p className='mb-4'>
+          Hola, {session?.user?.name}. Aquí puedes registrar a los adultos mayores que estén bajo tu cuidado
+        </p>
+        
+        {formData.map(data => (
+          <Input 
+            //className='border' 
+            isRequired 
+            key={data.id}
+            name={data.name}
+            variant="bordered"
+            placeholder={data.placeholder}
+            label={data.placeholder}
+            labelPlacement="outside"
+            type={data.type}
+            onChange={(e) => setDatosFormulario({...datosFormulario, [data.name]: e.target.value}) }
+          />
+        ))}
+        
+        <AlzheimerCheckbox datosFormulario={datosFormulario} setDatosFormulario={setDatosFormulario} />
+        
+        <UploadImage />
+        
+        <GenreCheckboxes datosFormulario={datosFormulario} setDatosFormulario={setDatosFormulario} />
+                
+        <button 
+          className="w-full rounded-[15px] bg-blue-400 text-white hover:opacity-90 py-[6px] font-bold"
+        >
+          Enviar
+        </button>
+      
+      </form>
+      
+      <QRfromProfile isDataCorrect={isDataCorrect} profileId={profileId} />
+    
+    </main>
   )
 }
